@@ -38,7 +38,16 @@ const ShapeComponent: React.FC<ShapeSelectorProps> = ({ onApplyShape }) => {
 				<label className="text-md font-medium">Shape</label>
 				<Select
 					value={shape}
-					onValueChange={setShape}
+					onValueChange={(value) =>
+						setShape(
+							value as
+								| "rectangle"
+								| "circle"
+								| "triangle"
+								| "line"
+								| "ellipse"
+						)
+					}
 					defaultValue="rectangle"
 				>
 					<SelectTrigger className="w-[180px]">
