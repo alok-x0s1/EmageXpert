@@ -228,7 +228,7 @@ export default function Home() {
 							<Card className="border hover:shadow-lg duration-300 hover:-translate-y-1">
 								<CardContent className="p-6 text-left">
 									<p className="text-xl italic mb-4">
-										"{testimonial.quote}"
+										&quot; {testimonial.quote} &quot;
 									</p>
 									<p className="text-chart-2">
 										- {testimonial.name}

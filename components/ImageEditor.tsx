@@ -51,7 +51,7 @@ const ImageEditor: React.FC<ImageEditorProps> = ({ image }) => {
 	const [isFlippedVertically, setIsFlippedVertically] = useState(false);
 	const [rotation, setRotation] = useState(0);
 	const [selectedColor, setSelectedColor] = useState<string>("");
-	const { state, updateState } = useImageContext();
+	const { state } = useImageContext();
 	const [shapeData, setShapeData] = useState<ShapeData | null>(null);
 
 	const presets: Record<string, FilterSettings> = {
@@ -236,7 +236,6 @@ const ImageEditor: React.FC<ImageEditorProps> = ({ image }) => {
 
 				ctx.drawImage(img, 0, 0, img.width, img.height);
 				ctx.restore();
-				// Draw selected shape
 				if (shapeData) {
 					ctx.fillStyle = shapeData.color;
 					ctx.strokeStyle = shapeData.color;
@@ -244,9 +243,8 @@ const ImageEditor: React.FC<ImageEditorProps> = ({ image }) => {
 					const canvasHeight = canvas.height;
 					const canvasWidth = canvas.width;
 
-					// Calculate the position for the shape to be drawn at the bottom
-					const bottomY = canvasHeight - 50; // 50 pixels from the bottom edge
-					let shapeX = (canvasWidth - size) / 2; // Center the shape horizontally
+					const bottomY = canvasHeight - 50;
+					const shapeX = (canvasWidth - size) / 2;
 
 					switch (shapeData.shape) {
 						case "rectangle":
@@ -255,7 +253,7 @@ const ImageEditor: React.FC<ImageEditorProps> = ({ image }) => {
 								bottomY - size / 2,
 								size,
 								size / 2
-							); // Adjusted to position it at the bottom
+							);
 							break;
 						case "circle":
 							ctx.beginPath();
@@ -265,12 +263,12 @@ const ImageEditor: React.FC<ImageEditorProps> = ({ image }) => {
 								size / 2,
 								0,
 								2 * Math.PI
-							); // Center horizontally and position at bottom
+							); 
 							ctx.fill();
 							break;
 						case "triangle":
 							ctx.beginPath();
-							ctx.moveTo(shapeX, bottomY); // Base of triangle at the bottom
+							ctx.moveTo(shapeX, bottomY);
 							ctx.lineTo(shapeX + size, bottomY);
 							ctx.lineTo(shapeX + size / 2, bottomY - size);
 							ctx.closePath();
@@ -279,7 +277,7 @@ const ImageEditor: React.FC<ImageEditorProps> = ({ image }) => {
 						case "line":
 							ctx.beginPath();
 							ctx.moveTo(shapeX, bottomY);
-							ctx.lineTo(shapeX + size, bottomY); // Draw line at the bottom
+							ctx.lineTo(shapeX + size, bottomY);
 							ctx.stroke();
 							break;
 						case "ellipse":
@@ -292,7 +290,7 @@ const ImageEditor: React.FC<ImageEditorProps> = ({ image }) => {
 								0,
 								0,
 								2 * Math.PI
-							); // Center horizontally and position at bottom
+							);
 							ctx.fill();
 							break;
 						default:

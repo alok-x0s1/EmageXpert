@@ -21,10 +21,6 @@ export default function ImageUpload() {
 		multiple: false,
 	});
 
-	const handleRemove = () => {
-		setImage(null);
-	};
-
 	return (
 		<div className="min-h-screen bg-background flex items-center flex-col gap-12 justify-center px-4 py-32">
 			{!image && (
